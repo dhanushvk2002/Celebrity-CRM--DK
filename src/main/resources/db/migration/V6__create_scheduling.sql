@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS schedule_events (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(200) NOT NULL,
+    celebrity_id BIGINT NOT NULL,
+    event_type VARCHAR(100),
+    location VARCHAR(255),
+    start_time DATETIME NOT NULL,
+    end_time DATETIME NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'SCHEDULED',
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_schedule_celebrity FOREIGN KEY (celebrity_id) REFERENCES celebrities(id) ON DELETE CASCADE
+);
+

@@ -1,0 +1,16 @@
+CREATE TABLE IF NOT EXISTS contracts (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    contract_number VARCHAR(100) NOT NULL UNIQUE,
+    title VARCHAR(200) NOT NULL,
+    celebrity_id BIGINT NOT NULL,
+    client_name VARCHAR(150) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    total_value DECIMAL(15, 2) NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'DRAFT',
+    terms TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_contracts_celebrity FOREIGN KEY (celebrity_id) REFERENCES celebrities(id) ON DELETE CASCADE
+);
+

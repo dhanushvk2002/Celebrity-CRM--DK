@@ -1,0 +1,37 @@
+CREATE TABLE IF NOT EXISTS ott_projects (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(200) NOT NULL,
+    platform VARCHAR(100) NOT NULL,
+    celebrity_id BIGINT,
+    role_type VARCHAR(100),
+    budget DECIMAL(15, 2),
+    shoot_start_date DATE,
+    status VARCHAR(50) NOT NULL DEFAULT 'IN_TALKS',
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_ott_celebrity FOREIGN KEY (celebrity_id) REFERENCES celebrities(id) ON DELETE SET NULL
+);
+
+CREATE TABLE IF NOT EXISTS casting_calls (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(200) NOT NULL,
+    project_name VARCHAR(150) NOT NULL,
+    role_name VARCHAR(100) NOT NULL,
+    requirements TEXT,
+    deadline DATE,
+    budget DECIMAL(15, 2),
+    status VARCHAR(50) NOT NULL DEFAULT 'OPEN',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS notifications (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    recipient_email VARCHAR(150) NOT NULL,
+    title VARCHAR(200) NOT NULL,
+    message TEXT NOT NULL,
+    is_read BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+

@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS campaigns (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(200) NOT NULL,
+    brand_name VARCHAR(150) NOT NULL,
+    celebrity_id BIGINT,
+    budget DECIMAL(15, 2) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'PLANNING',
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_campaigns_celebrity FOREIGN KEY (celebrity_id) REFERENCES celebrities(id) ON DELETE SET NULL
+);
+
